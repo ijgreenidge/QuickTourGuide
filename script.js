@@ -39,6 +39,8 @@ function initAutocomplete() {
   // For each place, get the icon, name and location.
   var bounds = new google.maps.LatLngBounds();
   places.forEach(function(place) {
+   console.log(place);
+   updatePhotos(place);
    if (!place.geometry) {
     console.log("Returned place contains no geometry");
     return;
@@ -69,31 +71,14 @@ function initAutocomplete() {
   });
   map.fitBounds(bounds);
  });
- $("#go").click(function() {
-  //searchBox.trigger('places_changed');
+ 
 
-  var searchTerm = $("#city-input").val();
-  console.log(searchTerm);
-   $.getJSON("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d0276e79c493dbc248d527abad92ae33&text=" + searchTerm + "&format=json",
-   
-   
-     function(response) { 
-      for (var i = 0; i < photos.photo.length; i++) {
-       var id = photos.photo[i].id
-       var serverId = photos.photo[i].server;
-       var farmId = photos.photo[i].farm;
-       var secret = photos.photo[i].secret;
-       "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg"
-
-       $("#photos").append("<img src="+ "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+id+"_"+secret+".jpg" +"/>")
-      }
-    });
-
- });
- $("#city-input").keypress(function(e) {
-  if (e.keyCode == 13)
-   $("#go").click();
- });
+ function updatePhotos(place) {
+  for(var i = 0; i < place.photos.length; i++){
+   var url = place.photos[i].getUrl({"maxWidth": 500, "maxHeight": 500});
+   $("#photos").append("<img class='image-fluid' src="+url+" />")
+  }
+ }
 }
 
 
@@ -104,3 +89,7 @@ function initAutocomplete() {
 // Google Map API KEY --> AIzaSyDLeay - 3 D4F8f2RnSTncDkF5tOxm0naI_4
 
 // "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d0276e79c493dbc248d527abad92ae33&text=miami&format=json"
+
+// Spotify API KEY --> b84ecb78168145d2a4d1e4bd0808d2eb
+// Spotify Secret --> 3301badf291d47e3840874019ee39892
+// GET	/v1/search?type=playlist

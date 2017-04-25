@@ -1,7 +1,14 @@
 #map{
     height: 500px;
 }
+#photos{
+    text-align: center;
+}
 
+#photos img{
+    width: 30%;
+    padding: 10px;
+}
 body{
     background-image: url("https://www.kcet.org/sites/kl/files/styles/kl_image_hero/public/thumbnails/image/city-walk_202_san-francisco_hero.jpg?itok=7_QwaxqI");
 }
