@@ -1,68 +1,14 @@
 /*global google $*/
 
-jQuery(document).ready(function ($) {
+function onClientLoad() {
+    gapi.client.load('youtube', 'v3', onYoutubeApiLoad);
+    console.log("youtube loaded");
+}
 
-  //$('#searchquery').keyup(function () {
-
-    // the search term
-    var q = "USA";
-
-    // YouTube Data API base URL (JSON response)
-    var url = "http://gdata.youtube.com/feeds/api/videos/?v=2&alt=jsonc&callback=?"
-
-    // set paid-content as false to hide movie rentals
-    url = url + '&paid-content=false';
-
-    // set duration as long to filter partial uploads
-    url = url + '&duration=long';
-
-    // order search results by view count
-    url = url + '&orderby=viewCount';
-
-    // we can request a maximum of 50 search results in a batch
-    url = url + '&max-results=50';
-
-    $.getJSON(url + "&q=" + q, function (json) {
-
-      var count = 0;
-
-      if (json.data.items) {
-
-        var items = json.data.items;
-        var html = "";
-
-        items.forEach(function (item) {
-
-          // Check the duration of the video, 
-          // full-length movies are generally longer than 1 hour
-          var duration = Math.round((item.duration) / (60 * 60));
-
-          // Filter out videos that aren't in the Film or Movies category
-          if ((duration > 1) && (item.category == "Movies" || item.category == "Film")) {
-
-            // Include the YouTube Watch URL youtu.be 
-            html += '<p><a href="http://youtu.be/' + item.id + '">';
-
-            // Add the default video thumbnail (default quality)
-            html += '<img src="http://i.ytimg.com/vi/' + item.id + '/default.jpg">';
-
-            // Add the video title and the duration
-            html += '<h2>' + item.title + ' ' + item.duration + '</h2></a></p>';
-            count++;
-          }
-        });
-      }
-
-      // Did YouTube return any search results?
-      if (count === 0) {
-        console.log("No videos found");
-      } else {
-        // Display the YouTube search results
-        console.log(html);
-      }
-    });
-  //});
-});
+function onYoutubeApiLoad() {
+    gapi.client.setApiKey("AIzaSyCzVOUqO_DSfgQpbCI_EE12KkOKoqTQC_4");
+    console.log("api key set");
+}
 
 var searchBox;
 
@@ -89,8 +35,11 @@ function initAutocomplete() {
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
+        console.log("Searching...")
         var places = searchBox.getPlaces();
-
+        
+        //console.log(places);
+        
         if (places.length == 0) {
             return;
         }
@@ -134,6 +83,7 @@ function initAutocomplete() {
             }
         });
         map.fitBounds(bounds);
+        searchVideos(places[0].name);
     });
 
 
@@ -147,17 +97,28 @@ function initAutocomplete() {
             $("#photos").append("<img class='image-fluid' src=" + url + " />");
         }
     }
+
+    function searchVideos(searchWord) {
+        var request = gapi.client.youtube.search.list({
+            part: 'snippet',
+            q: searchWord
+        });
+        request.execute(onSearchResponse);
+    }
+    
+    function onSearchResponse(response){
+        console.log(response);
+        for(var i = 0; i < response.items.length; i++){
+            console.log("appending...");
+
+            $("#youtube").append("<div class='embed-responsive embed-responsive-4by3'><iframe class='embed-responsive-item' width='420' height='315' src='https://www.youtube.com/embed/"+ response.items[i].id.videoId + "'></iframe></div>");
+        }
+    }
 }
 
 
 
 
 
-// Flickr API KEY --> d0276e79c493dbc248d527abad92ae33
+
 // Google Map API KEY --> AIzaSyDLeay - 3 D4F8f2RnSTncDkF5tOxm0naI_4
-
-// "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d0276e79c493dbc248d527abad92ae33&text=miami&format=json"
-
-// Spotify API KEY --> b84ecb78168145d2a4d1e4bd0808d2eb
-// Spotify Secret --> 3301badf291d47e3840874019ee39892
-// GET	/v1/search?type=playlist

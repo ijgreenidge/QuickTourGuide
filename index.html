@@ -9,34 +9,33 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
-                <input type="text" id="city-input" class="form-control" id="input" placeholder="Enter City Name" />
-            </div>
-            
-            <div class="col-md-3">
-                <button class="btn btn-block" id="go">GO</button>
-            </div>
+            <input type="text" id="city-input" class="form-control" id="input" placeholder="Enter City Name" />
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div id="map"></div>
             </div>
-        <div class="row">
-            <div id ="photos">
-                
+            <div class="row">
+                <div id="photos">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="embed-responsive embed-responsive-16by9" id="youtube">
+                    
+                </div>
             </div>
         </div>
-        
-        </div>
-
     </div>
+
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
+
     <script type="text/javascript" src="script.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLeay-3D4F8f2RnSTncDkF5tOxm0naI_4&libraries=places&callback=initAutocomplete" type="text/javascript"></script>
-    
+
 </body>
 
 </html>
