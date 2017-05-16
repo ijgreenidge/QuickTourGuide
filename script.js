@@ -37,9 +37,9 @@ function initAutocomplete() {
     searchBox.addListener('places_changed', function() {
         console.log("Searching...")
         var places = searchBox.getPlaces();
-        
+
         //console.log(places);
-        
+
         if (places.length == 0) {
             return;
         }
@@ -105,14 +105,20 @@ function initAutocomplete() {
         });
         request.execute(onSearchResponse);
     }
-    
-    function onSearchResponse(response){
+
+    function onSearchResponse(response) {
+        $("#youtube").html("");
         console.log(response);
-        for(var i = 0; i < response.items.length; i++){
+        for (var i = 0; i < response.items.length; i++) {
             console.log("appending...");
 
-            $("#youtube").append("<div class='embed-responsive embed-responsive-4by3'><iframe class='embed-responsive-item' width='420' height='315' src='https://www.youtube.com/embed/"+ response.items[i].id.videoId + "'></iframe></div>");
+            //$("#youtube").append("<div class='video-container'><div class='embed-responsive embed-responsive-16by9 video-embed'><iframe class='embed-responsive-item' width='420' height='315' src='https://www.youtube.com/embed/"+ response.items[i].id.videoId + "'></iframe></div></div>");
+            $("#youtube").append("<div class='video-container embed-responsive embed-responsive-16by9'><div class='video-wrapper'><div class='youtube' id='" + response.items[i].id.videoId + "' data-params='modestbranding=1&showinfo=0&controls=0&vq=hd720'></div></div></div>");
         }
+        var tag = document.createElement('script');
+        tag.src = "video.js";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 }
 
