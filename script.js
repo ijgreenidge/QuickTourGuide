@@ -32,10 +32,15 @@ function initAutocomplete() {
     });
 
     var markers = [];
+    
+    
+    
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
-        console.log("Searching...")
+        if($(".title").hasClass("invisible"))
+            $(".title").removeClass("invisible");
+        
         var places = searchBox.getPlaces();
 
         //console.log(places);
@@ -88,6 +93,7 @@ function initAutocomplete() {
 
 
     function updatePhotos(place) {
+            
         $("#photos").html("");
         for (var i = 0; i < place.photos.length; i++) {
             var url = place.photos[i].getUrl({
@@ -113,12 +119,16 @@ function initAutocomplete() {
             console.log("appending...");
 
             //$("#youtube").append("<div class='video-container'><div class='embed-responsive embed-responsive-16by9 video-embed'><iframe class='embed-responsive-item' width='420' height='315' src='https://www.youtube.com/embed/"+ response.items[i].id.videoId + "'></iframe></div></div>");
-            $("#youtube").append("<div class='video-container embed-responsive embed-responsive-16by9'><div class='video-wrapper'><div class='youtube' id='" + response.items[i].id.videoId + "' data-params='modestbranding=1&showinfo=0&controls=0&vq=hd720'></div></div></div>");
+            $("#youtube").append("<div class='video-container'><div class='video-wrapper embed-responsive embed-responsive-16by9'><div class='youtube' id='" + response.items[i].id.videoId + "' data-params='modestbranding=1&showinfo=0&controls=0&vq=hd720'></div></div></div>");
         }
         var tag = document.createElement('script');
         tag.src = "video.js";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+    
+    function addInitValue(){
+        
     }
 }
 

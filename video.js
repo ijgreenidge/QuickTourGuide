@@ -23,7 +23,7 @@ r(function(){
 
         var image = document.createElement("img");
         image.setAttribute("class","bg-img");
-        image.setAttribute("src","https://img.youtube.com/vi/"+ videos[i].id +"/hqdefault.jpg");
+        image.setAttribute("src","https://img.youtube.com/vi/"+ videos[i].id +"/mqdefault.jpg");
         videos[i].appendChild(image);
 
         // Overlay the Play icon to make it look like a video player
