@@ -39,7 +39,6 @@ function initAutocomplete() {
     // more details for that place.
     searchBox.addListener('places_changed', function() {
         if($(".title").hasClass("invisible"))
-            $(".title").removeClass("invisible");
         
         var places = searchBox.getPlaces();
 
@@ -127,13 +126,16 @@ function initAutocomplete() {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
     
-    function addInitValue(){
+    // function addInitValue(){
         
-    }
+    // }
+    
+    function addHeading(place){
+        $(place).appendTo(".title");
 }
 
 
-
+}
 
 
 
