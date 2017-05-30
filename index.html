@@ -7,36 +7,42 @@
 </head>
 
 <body>
-      
+
     <div class="container">
-    
+
         <div class="row">
-            <input type="text" id="city-input" class="form-control" id="input" placeholder=" Welcome to Quick Tour Guide!, Please Enter City Name" />
+            <div class="col-md-12">
+                <h1>Quick Tour Guide</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="text" id="city-input" class="form-control" id="input" placeholder="Welcome to Quick Tour Guide!, Please Enter City Name" />
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div id="map">
-                    
+
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title invisible">Pictures of </h3>
+                    <h3 class="title invisible" id="image_header">Pictures of </h3>
                 </div>
             </div>
             <div class="row">
                 <div id="photos">
-                    
+
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title invisible">Videos related to </h3>
+                    <h3 class="title invisible" id="video_header">Videos related to </h3>
                 </div>
             </div>
             <div class="row">
                 <div id="youtube">
-                    
+
                 </div>
             </div>
         </div>
@@ -49,7 +55,7 @@
     <script type="text/javascript" src="script.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=onClientLoad"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLeay-3D4F8f2RnSTncDkF5tOxm0naI_4&libraries=places&callback=initAutocomplete" type="text/javascript"></script>
-    
+
 
 </body>
 

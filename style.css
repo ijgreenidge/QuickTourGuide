@@ -2,10 +2,13 @@
     text-align: center;
     padding: 10px;
 }
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
 #map {
     height: 500px;
     border: solid 8px;
-    top: 20px;
 }
 
 #photos,
@@ -16,7 +19,7 @@
 #photos img,
 .video-container {
     width: 30%;
-    padding: 10px;
+    padding: 0px 10px 10px 10px;
     top: 20px;
 }
 

@@ -32,15 +32,22 @@ function initAutocomplete() {
     });
 
     var markers = [];
-    
-    
-    
+
+
+
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
-        if($(".title").hasClass("invisible"))
-        
         var places = searchBox.getPlaces();
+        
+        if ($(".title").hasClass("invisible")){
+            $("#video_header").append(places[0].name);
+            $("#image_header").append(places[0].name);
+            $(".title").removeClass("invisible");
+        }else{
+            $("#image_header").html("Pictures of " + places[0].name);
+            $("#video_header").html("Videos related to " + places[0].name);
+        }
 
         //console.log(places);
 
@@ -92,7 +99,7 @@ function initAutocomplete() {
 
 
     function updatePhotos(place) {
-            
+
         $("#photos").html("");
         for (var i = 0; i < place.photos.length; i++) {
             var url = place.photos[i].getUrl({
@@ -125,14 +132,14 @@ function initAutocomplete() {
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
-    
+
     // function addInitValue(){
-        
+
     // }
-    
-    function addHeading(place){
-        $(place).appendTo(".title");
-}
+
+    function addHeading(place) {
+        $("#video_header").append(place);
+    }
 
 
 }
